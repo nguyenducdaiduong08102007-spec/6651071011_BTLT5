@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Câu 23 - Tính tiền lương</title>
+    <style>
+        table { border-collapse: collapse; background-color: #e6f3ff; width: 350px; }
+        td { padding: 8px; border: 1px solid #ccc; }
+        .title { background-color: #0066cc; color: white; text-align: center; font-weight: bold; }
+        input[type="text"] { width: 95%; }
+        .center { text-align: center; }
+    </style>
+</head>
+<body>
+    <form id="salaryForm">
+        <table>
+            <tr>
+                <td colspan="2" class="title">BẢNG TÍNH LƯƠNG</td>
+            </tr>
+            <tr>
+                <td>Lương:</td>
+                <td><input type="number" id="luong" value="1000000"></td>
+            </tr>
+            <tr>
+                <td>Hệ số lương:</td>
+                <td><input type="number" step="0.1" id="heSo" value="3.2"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="center">
+                    <button type="button" onclick="tinhLuong()">Tính lương tháng</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Lương tháng:</td>
+                <td><input type="text" id="luongThang" readonly style="background-color: #ffffcc;"></td>
+            </tr>
+        </table>
+    </form>
+
+    <script src="javaScript/script.js"></script>
+</body>
+</html>

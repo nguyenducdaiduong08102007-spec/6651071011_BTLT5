@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Câu 27 - Quản lý bảng sản phẩm</title>
+    <style>
+        table { border-collapse: collapse; width: 80%; margin: 20px 0; }
+        th, td { border: 1px solid #333; padding: 10px; text-align: center; }
+        th { background-color: #4CAF50; color: white; }
+        button.btn-delete { background-color: #f44336; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; }
+        button.btn-delete:hover { background-color: #d32f2f; }
+    </style>
+</head>
+<body>
+    <h2>DANH SÁCH SẢN PHẨM</h2>
+    <table id="productTable">
+        <thead>
+            <tr>
+                <th>Số lượng</th>
+                <th>Đơn giá (VNĐ)</th>
+                <th>Tổng (VNĐ)</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2</td>
+                <td>150,000</td>
+                <td>300,000</td>
+                <td><button class="btn-delete" onclick="deleteRow(this)">Xóa</button></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>20,000</td>
+                <td>100,000</td>
+                <td><button class="btn-delete" onclick="deleteRow(this)">Xóa</button></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>500,000</td>
+                <td>500,000</td>
+                <td><button class="btn-delete" onclick="deleteRow(this)">Xóa</button></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>80,000</td>
+                <td>240,000</td>
+                <td><button class="btn-delete" onclick="deleteRow(this)">Xóa</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="javaScript/script.js"></script>
+</body>
+</html>

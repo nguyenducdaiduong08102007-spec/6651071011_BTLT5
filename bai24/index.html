@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Câu 24 - Xuất thứ trong tuần</title>
+</head>
+<body>
+    <form id="dateForm">
+        <label>Ngày: </label>
+        <input type="number" id="ngay" value="12" min="1" max="31" style="width: 50px;">
+        
+        <label>Tháng: </label>
+        <select id="thang">
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+        
+        <label>Năm: </label>
+        <input type="number" id="nam" value="2015" style="width: 70px;"><br><br>
+        
+        <button type="button" onclick="xuatThu()">Xuất thứ</button>
+    </form>
+    
+    <h3 id="result" style="color: blue;"></h3>
+
+    <script src="javaScript/script.js"></script>
+</body>
+</html>
