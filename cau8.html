@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương trình máy tính</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .calc-container { display: flex; align-items: center; gap: 10px; }
+        input, select { padding: 8px; font-size: 16px; text-align: center; }
+        input[type="number"] { width: 80px; }
+        #result { font-weight: bold; width: 100px; background-color: #f4f4f4; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h2>Máy tính đơn giản</h2>
+    <div class="calc-container">
+        <input type="number" id="num1" value="12">
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="number" id="num2" value="14">
+        <span>=</span>
+        <input type="text" id="result" readonly>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            function calculate() {
+                var n1 = parseFloat($('#num1').val());
+                var n2 = parseFloat($('#num2').val());
+                var op = $('#operator').val();
+                var res = 0;
+
+                if (isNaN(n1) || isNaN(n2)) {
+                    $('#result').val('');
+                    return;
+                }
+
+                switch (op) {
+                    case '+': res = n1 + n2; break;
+                    case '-': res = n1 - n2; break;
+                    case '*': res = n1 * n2; break;
+                    case '/': 
+                        res = n2 !== 0 ? (n1 / n2) : 'Lỗi / 0'; 
+                        break;
+                }
+                $('#result').val(res);
+            }
+
+            // Tự động tính lại khi thay đổi dữ liệu
+            $('#num1, #num2, #operator').on('input change', calculate);
+            
+            // Thực hiện tính ngay khi tải trang
+            calculate();
+        });
+    </script>
+</body>
+</html>

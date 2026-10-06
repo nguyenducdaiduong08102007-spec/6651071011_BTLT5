@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Display a random image.</title>
+    <style type="text/css">
+        body {margin-top: 30px;}
+    </style>
+</head>
+<body>
+    <div>
+        <button id="jsstyle" onclick="display_random_image();">Show Image</button>
+    </div>
+    <!-- Vùng chứa hình ảnh ngẫu nhiên -->
+    <div id="imageContainer" style="margin-top: 20px;"></div>
+
+    <script>
+        function display_random_image() {
+            // Mảng chứa thông tin danh sách các hình ảnh
+            var imageList = [
+                {
+                    src: "http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg",
+                    width: "240",
+                    height: "160"
+                },
+                {
+                    src: "http://farm1.staticflickr.com/33/45336904_1aef569b30_n.jpg",
+                    width: "320",
+                    height: "195"
+                },
+                {
+                    src: "http://farm6.staticflickr.com/5211/5384592886_80a512e2c9.jpg",
+                    width: "500",
+                    height: "343"
+                }
+            ];
+
+            // Lấy ngẫu nhiên chỉ số trong mảng
+            var randomIndex = Math.floor(Math.random() * imageList.length);
+            var selectedImg = imageList[randomIndex];
+
+            // Hiển thị ảnh ngẫu nhiên ra thẻ div chứa ảnh
+            var container = document.getElementById('imageContainer');
+            container.innerHTML = '<img src="' + selectedImg.src + 
+                                  '" width="' + selectedImg.width + 
+                                  '" height="' + selectedImg.height + 
+                                  '" alt="Random Image">';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Validation Exercise</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 30px; }
+        .form-box { width: 450px; border: 1px solid #ccc; padding: 20px; border-radius: 8px; background: #fafafa; }
+        .form-box h2 { text-align: center; margin-top: 0; }
+        .form-group { margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+        .form-group label { width: 50%; text-align: right; margin-right: 15px; font-size: 14px; }
+        .form-group input[type="text"], .form-group select { width: 45%; padding: 4px; }
+        .radio-group { width: 45%; }
+        .buttons { text-align: center; margin-top: 15px; }
+        .buttons input { padding: 5px 15px; cursor: pointer; margin: 0 5px; }
+        .error { color: red; font-size: 13px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="form-box">
+    <h2>Personal Information</h2>
+    <form id="regForm">
+        <div class="form-group">
+            <label>Enter name*:</label>
+            <input type="text" id="fullname">
+        </div>
+        <div class="form-group">
+            <label>Sex*:</label>
+            <div class="radio-group">
+                <input type="radio" name="sex" value="Male"> Male
+                <input type="radio" name="sex" value="Female"> Female
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Enter email address*:</label>
+            <input type="text" id="email">
+        </div>
+        <div class="form-group">
+            <label>Enter birthday (MM/DD/YYYY)*:</label>
+            <input type="text" id="birthday">
+        </div>
+        <div class="form-group">
+            <label>Enter street address (line 1)*:</label>
+            <input type="text" id="address">
+        </div>
+        <div class="form-group">
+            <label>Enter city*:</label>
+            <input type="text" id="city">
+        </div>
+        <div class="form-group">
+            <label>Select a region*:</label>
+            <select id="region">
+                <option value="">-- Chọn --</option>
+                <option value="Asia">Asia</option>
+                <option value="Europe">Europe</option>
+                <option value="America">America</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Enter 5-digit ZIP code*:</label>
+            <input type="text" id="zip">
+        </div>
+
+        <div class="buttons">
+            <input type="button" id="btnFinish" value="Finished">
+            <input type="button" id="btnClear" value="Clear">
+        </div>
+        <div id="msg" class="error"></div>
+    </form>
+</div>
+
+<script>
+$(document).ready(function() {
+    // Nút Clear: Xóa toàn bộ dữ liệu đã nhập
+    $('#btnClear').click(function() {
+        $('#regForm')[0].reset();
+        $('#msg').text('').css('color', 'red');
+    });
+
+    // Nút Finished: Kiểm tra Validate dữ liệu
+    $('#btnFinish').click(function() {
+        $('#msg').text('').css('color', 'red');
+        
+        var name = $('#fullname').val().trim();
+        var sex = $('input[name="sex"]:checked').val();
+        var email = $('#email').val().trim();
+        var birthday = $('#birthday').val().trim();
+        var address = $('#address').val().trim();
+        var city = $('#city').val().trim();
+        var region = $('#region').val();
+        var zip = $('#zip').val().trim();
+
+        // 1. Kiểm tra rỗng đối với tất cả các trường có dấu *
+        if (!name || !sex || !email || !birthday || !address || !city || !region || !zip) {
+            $('#msg').text('Vui lòng điền đầy đủ các trường có dấu (*)!');
+            return;
+        }
+
+        // 2. Validation Email:
+        // Cần đúng 1 ký tự @, account trước @ tối đa 1 dấu chấm, domain sau @ có ít nhất 1 dấu chấm.
+        var emailParts = email.split('@');
+        if (emailParts.length !== 2) {
+            $('#msg').text('Email phải chứa đúng 1 ký tự @!');
+            return;
+        }
+        var account = emailParts[0];
+        var domain = emailParts[1];
+
+        if (!account || !domain) {
+            $('#msg').text('Định dạng Email không hợp lệ!');
+            return;
+        }
+        var accountDots = (account.match(/\./g) || []).length;
+        if (accountDots > 1) {
+            $('#msg').text('Tên account email (trước @) chỉ được có nhiều nhất 1 dấu chấm!');
+            return;
+        }
+        var domainDots = (domain.match(/\./g) || []).length;
+        if (domainDots < 1) {
+            $('#msg').text('Tên domain email (sau @) phải có ít nhất 1 dấu chấm!');
+            return;
+        }
+
+        // 3. Validation Ngày sinh (MM/DD/YYYY hoặc MM-DD-YYYY)
+        var dateRegex = /^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/;
+        var match = birthday.match(dateRegex);
+        if (!match) {
+            $('#msg').text('Ngày sinh phải có dạng MM/DD/YYYY hoặc MM-DD-YYYY!');
+            return;
+        }
+        var month = parseInt(match[1], 10);
+        var day = parseInt(match[2], 10);
+        var year = parseInt(match[3], 10);
+        var currentYear = new Date().getFullYear();
+
+        if (month < 1 || month > 12) {
+            $('#msg').text('Tháng sinh phải từ 1 đến 12!');
+            return;
+        }
+        if (day < 1 || day > 31) {
+            $('#msg').text('Ngày sinh không hợp lệ!');
+            return;
+        }
+        if (year >= currentYear) {
+            $('#msg').text('Năm sinh phải nhỏ hơn năm hiện tại (' + currentYear + ')!');
+            return;
+        }
+
+        // 4. Validation Zip Code: Đúng 5 số
+        var zipRegex = /^\d{5}$/;
+        if (!zipRegex.test(zip)) {
+            $('#msg').text('ZIP code phải gồm đúng 5 chữ số!');
+            return;
+        }
+
+        // Nếu hợp lệ
+        $('#msg').css('color', 'green').text('Đăng ký thành công!');
+    });
+});
+</script>
+
+</body>
+</html>

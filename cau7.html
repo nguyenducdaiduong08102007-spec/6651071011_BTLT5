@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển hướng đến đường link</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Nhập đường link và nhấn "Submit" để chuyển hướng:</h1>
+    <form id="linkForm">
+        <input type="text" id="linkInput" placeholder="Nhập đường link">
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $('#linkForm').on('submit', function(e) {
+                e.preventDefault();
+                var url = $('#linkInput').val().trim();
+                
+                if (!url) {
+                    alert('Vui lòng nhập đường link!');
+                    return;
+                }
+                
+                // Tự động thêm http:// nếu chưa có giao thức
+                if (!/^https?:\/\//i.test(url)) {
+                    url = 'http://' + url;
+                }
+                
+                // Hỏi xác nhận qua hộp thoại Confirm
+                if (confirm('Bạn có muốn chuyển hướng đến trang ' + url + ' không?')) {
+                    window.location.href = url;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

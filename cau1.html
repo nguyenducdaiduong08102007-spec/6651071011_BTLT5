@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>JS DOM paragraph style</title>
+    <!-- Nhúng thư viện jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head> 
+<body>
+    <p id="text">JavaScript Exercises - w3resource</p> 
+    <div>
+        <button id="jsstyle" onclick="js_style()">Style</button>
+    </div>
+
+    <script>
+        function js_style() {
+            // Áp dụng jQuery để thay đổi CSS
+            $('#text').css({
+                'font-size': '24px',
+                'font-family': 'Arial, sans-serif',
+                'color': 'blue'
+            });
+        }
+    </script>
+</body>
+</html>
